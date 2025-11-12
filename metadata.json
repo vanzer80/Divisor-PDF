@@ -1,0 +1,5 @@
+{
+  "name": "PDF Splitter 10MB (Lossless)",
+  "description": "A web application to split large PDF files into individual pages, prioritizing lossless processing to preserve quality. Each page is optimized to be under 10MB, with options for handling oversized pages.",
+  "requestFramePermissions": []
+}
