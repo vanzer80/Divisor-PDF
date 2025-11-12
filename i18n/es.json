@@ -43,5 +43,6 @@
   "error_pageSelection_invalidNumber": "Número de página no válido.",
   "error_pageSelection_invalid": "Por favor, ingrese una selección de páginas válida.",
   "header_pageCount": "{{count}} páginas encontradas",
-  "error_pdf_empty": "Este PDF parece estar vacío y no contiene páginas para procesar."
+  "error_pdf_empty": "Este PDF parece estar vacío y no contiene páginas para procesar.",
+  "warning_largeFile": "Este es un archivo grande. El procesamiento puede ser lento o hacer que el navegador deje de responder en dispositivos con memoria limitada."
 }

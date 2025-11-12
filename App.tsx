@@ -14,7 +14,7 @@ import saveAs from 'file-saver';
 import { PDFDocument } from 'pdf-lib';
 
 
-const MAX_FILE_SIZE_BYTES = 100 * 1024 * 1024; // 100 MB
+const MAX_FILE_SIZE_BYTES = 500 * 1024 * 1024; // 500 MB
 
 const App: React.FC = () => {
     const [appState, setAppState] = useState<AppState>(AppState.IDLE);
@@ -28,6 +28,7 @@ const App: React.FC = () => {
     });
     const [results, setResults] = useState<PageResult[]>([]);
     const [error, setError] = useState<{ message: string; suggestion?: string } | null>(null);
+    const [largeFileWarning, setLargeFileWarning] = useState<string | null>(null);
     const fileRef = useRef<File | null>(null);
 
     // State for page selection
@@ -51,6 +52,12 @@ const App: React.FC = () => {
             setAppState(AppState.ERROR);
             setFile(selectedFile); // Still show file info in error state
             return;
+        }
+
+        if (selectedFile.size > 100 * 1024 * 1024) { // Warning threshold
+            setLargeFileWarning(t('warning_largeFile'));
+        } else {
+            setLargeFileWarning(null);
         }
         
         setFile(selectedFile);
@@ -95,6 +102,7 @@ const App: React.FC = () => {
         });
         setResults([]);
         setError(null);
+        setLargeFileWarning(null);
         setExtractionMode(ExtractionMode.ALL);
         setPageSelection('');
         setPageSelectionError(null);
@@ -282,6 +290,12 @@ const App: React.FC = () => {
 
                             {appState === AppState.READY && (
                                 <div className="w-full max-w-lg flex flex-col items-center space-y-6">
+                                    {largeFileWarning && (
+                                        <div className="w-full p-3 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-200 rounded-md flex items-start space-x-3 text-sm border border-yellow-200 dark:border-yellow-800">
+                                            <Icons.Warning className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                                            <p>{largeFileWarning}</p>
+                                        </div>
+                                    )}
                                     <div className="w-full p-4 border rounded-md dark:border-slate-600">
                                       <p className="text-center font-medium">{t('extraction_options_title', { totalPages })}</p>
                                       <div className="mt-4 space-y-4">

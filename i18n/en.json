@@ -43,5 +43,6 @@
   "error_pageSelection_invalidNumber": "Invalid page number entered.",
   "error_pageSelection_invalid": "Please enter a valid page selection.",
   "header_pageCount": "{{count}} pages found",
-  "error_pdf_empty": "This PDF appears to be empty and contains no pages to process."
+  "error_pdf_empty": "This PDF appears to be empty and contains no pages to process.",
+  "warning_largeFile": "This is a large file. Processing may be slow or cause the browser to become unresponsive on devices with limited memory."
 }
